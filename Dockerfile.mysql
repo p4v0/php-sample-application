@@ -1,0 +1,8 @@
+# Usa la imagen oficial de MySQL 
+FROM mysql:8.0
+
+# Copia el script de inicialización de la base de datos al directorio de inicialización de la imagen de MySQL 
+COPY ./sql/db.sql /docker-entrypoint-initdb.d
+
+# Exponer el puerto por defecto de MySQL
+EXPOSE 3306

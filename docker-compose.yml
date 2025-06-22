@@ -1,0 +1,35 @@
+
+services: # defino los contendores
+  app-clouxtr: # nombre contenedor de la app PHP
+    build:  # Construye la imagen de la app PHP
+      context: . # ruta al dockerfile
+      dockerfile: Dockerfile # Usa el Dockerfile de la app PHP
+    ports:
+      - "8080:80" # Expone la app en http://localhost:8080
+    depends_on:
+      - "db-clouxtr" # Espera a que el contendor del a base de datos esté lista antes de iniciar
+    environment:
+      # Variables de entorno para conexión a la base de datos 
+      MYSQL_HOST: db-clouxtr # nombre del contenedor de la base de datos
+      MYSQL_DATABASE: ${MYSQL_DATABASE} # nombre BD
+      MYSQL_USER: ${MYSQL_USER} # usuario BD
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD} # pass user BD
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # pass root BD para inicializar
+
+
+  db-clouxtr: # nombre contenedor de la base de datos 
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql 
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306" # Expone MySQL para acceso externo (opcional, para debug)
+    volumes:
+      - db_data:/var/lib/mysql # Persistencia de datos de la base de datos
+
+volumes:
+  db_data: # Volumen nombrado para persistencia de la base de datos

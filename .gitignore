@@ -2,3 +2,5 @@ config
 composer.phar
 logs/*
 vendor
+# Cambios respecto al original: Se omite el archivo .env del control de versiones para proteger datos sensibles.
+.env
