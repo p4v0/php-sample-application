@@ -1,0 +1,30 @@
+
+
+services:
+  app-clouxtr: # Contenedor de la aplicación PHP
+    image: 0v4p/app-clouxtr-1:latest # Usa la imagen publicada en Docker Hub
+    ports:
+      - "8080:80" # Expone la app en http://localhost:8080
+    depends_on:
+      - db-clouxtr # Espera a que la base de datos esté lista
+    environment:
+      # Variables de entorno para conexión a la base de datos
+      MYSQL_HOST: db-clouxtr
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
+  db-clouxtr: # Contenedor de la base de datos MySQL
+    image: 0v4p/db-clouxtr-1:latest # Usa la imagen publicada en Docker Hub
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+ 
+    volumes:
+      - db_data:/var/lib/mysql # Persistencia de datos de la base de datos
+
+volumes:
+  db_data: # Volumen nombrado para persistencia de la base de datos
