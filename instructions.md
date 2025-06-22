@@ -4,11 +4,15 @@
 
 - Tener instalado [Docker](https://docs.docker.com/get-docker/) y [Docker Compose](https://docs.docker.com/compose/install/).
 
-## 2. descarga el archivo [docker-compose-pub.yml]()
+## 2. descarga el archivo [docker-compose-pub.yml](https://raw.githubusercontent.com/p4v0/php-sample-application/refs/heads/master/docker-compose-pub.yml)
 
-## 2. Variables de entorno
+En la web que abre el link, clic drecho, Guardar como... y elige una carpeta de tu equipo.
 
-Crea un archivo llamado `.env` en la misma carpeta donde está el `docker-compose` provisto con el siguiente contenido (ajusta los valores según tu caso):
+> **asegúrate de que quede guardado como "docker-compose-pub.yml"**
+
+## 3. Variables de entorno
+
+Crea un archivo llamado `.env` en la misma carpeta donde descargaste `docker-compose-pub.yml`. Y copia el siguiente contenido en el `.env` (ajusta los valores según tu caso):
 
 ```
 MYSQL_DATABASE=nombre_de_tu_bd
@@ -42,4 +46,6 @@ Abre tu navegador y visita:
   ```sh
   docker-compose down
   ```
-- El archivo `docker-compose.yml` ya está configurado para usar las imágenes publicadas en Docker Hub y las variables de entorno definidas
+- El archivo `docker-compose-pub.yml` está configurado para usar las imágenes publicadas en Docker Hub y las variables de entorno definidas.
+
+cpavony
